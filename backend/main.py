@@ -13,14 +13,19 @@ if __name__ == '__main__':
     # Comando para executar o servidor de delete
     del_command = ["uvicorn", "delete_service:app", "--host", "localhost", "--port", "8004"]
 
+    # Comando para executar servidor de alteracao
+    change_command = ["uvicorn", "change_service:app", "--host", "localhost", "--port", "8005"]
+
     # Inicia os dois servidores em processos separados
     auth_process = subprocess.Popen(auth_command)
     data_process = subprocess.Popen(data_command)
     cad_process = subprocess.Popen(cad_command)
     del_process = subprocess.Popen(del_command)
+    change_process = subprocess.Popen(change_command)
 
     # Aguarda a conclusão dos processos (isso não bloqueará o loop principal)
     auth_process.wait()
     data_process.wait()
     cad_process.wait()
     del_process.wait()
+    change_process.wait()
