@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage";
 import Cadastro from "./components/Cadastro";
 import Consulta from "./components/Consulta";
 import Delete from "./components/Delete";
+import Alterar_Cad from "./components/ChangeCad";
 // import OutraPage from "./components/OutraPage";
 
 
@@ -21,7 +22,7 @@ const App = () => {
     // Verifica se o token existe e não está expirado
     return token !== null;
   };
-  
+
 
   return (
     <div>
@@ -29,28 +30,33 @@ const App = () => {
       <Router>
         <NavBarPage />
         <div className="MyScreen">
-          
+
           <Routes>
 
-            <Route 
-              path="/login" 
-              element={ifAuthenticated() ? <Navigate to="/home" /> : <LoginPage />}/>
+            <Route
+              path="/auth"
+              element={ifAuthenticated() ? <Navigate to="/home" /> : <LoginPage />} />
             {/* Rota protegida para a página inicial */}
             <Route
               path="/home"
               element={ifAuthenticated() ? <HomePage /> : <Navigate to="/login" />}
             />
             <Route
-              path="/cadastro"
+              path="/reg"
               element={ifAuthenticated() ? <Cadastro /> : <Navigate to="/login" />}
             />
-            <Route 
-              path="/consulta"
+            <Route
+              path="/query"
               element={ifAuthenticated() ? <Consulta /> : <Navigate to="/login" />}
             />
-            <Route 
+            <Route
               path="/delete"
               element={ifAuthenticated() ? <Delete /> : <Navigate to="/login" />}
+            />
+
+            <Route
+              path="/change"
+              element={ifAuthenticated() ? <Alterar_Cad /> : <Navigate to="/login" />}
             />
 
             {/* Redireciona para a página de login se nenhuma rota corresponder */}

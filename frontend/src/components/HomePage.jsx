@@ -11,10 +11,10 @@ const Home = () => {
         
         <h2>Menu de Opções</h2>
         <div className="border-top mt-3"></div>
-        <a className="dropdown-item border rounded p-1 my-3 text-center" href="/cadastro">Iniciar Cadastro</a>
-        <a className="dropdown-item border rounded p-1 my-3 text-center" href="/consulta">Consultar Cadastro</a>
+        <a className="dropdown-item border rounded p-1 my-3 text-center" href="/reg">Iniciar Cadastro</a>
+        <a className="dropdown-item border rounded p-1 my-3 text-center" href="/query">Consultar Cadastro</a>
         <a className="dropdown-item border rounded p-1 my-3 text-center" href="/delete">Excluir Cadastro</a>
-        <a className="dropdown-item border rounded p-1 my-3 text-center" href="/alterar">Alterar Cadastro</a>
+        <a className="dropdown-item border rounded p-1 my-3 text-center" href="/change">Alterar Cadastro</a>
       </div>
 
     </div>

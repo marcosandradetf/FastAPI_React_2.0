@@ -26,8 +26,8 @@ async def delete_items(request: ItensEnviadosPeloCliente):
     # Exemplo de lógica de exclusão: removendo os itens selecionados do DataFrame
 
     # path para file.csv
-    meus_dados = "meus_dados"
-    dir_csv = os.path.join(meus_dados, 'dados.csv')
+    meus_dados = "library"
+    dir_csv = os.path.join(meus_dados, 'data.csv')
 
     # leitura do csv
     df = pd.read_csv(dir_csv)
