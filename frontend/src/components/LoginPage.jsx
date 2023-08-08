@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
 import HostConfig from './HostConfig'
 
 

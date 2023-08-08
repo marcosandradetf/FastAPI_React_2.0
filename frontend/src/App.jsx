@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
 
 import LoginPage from "./components/LoginPage";
 import NavBarPage from "./components/NavBarPage";
@@ -11,7 +11,6 @@ import Cadastro from "./components/Cadastro";
 import Consulta from "./components/Consulta";
 import Delete from "./components/Delete";
 import Alterar_Cad from "./components/ChangeCad";
-// import OutraPage from "./components/OutraPage";
 
 
 const App = () => {
@@ -34,7 +33,7 @@ const App = () => {
           <Routes>
 
             <Route
-              path="/auth"
+              path="/login"
               element={ifAuthenticated() ? <Navigate to="/home" /> : <LoginPage />} />
             {/* Rota protegida para a página inicial */}
             <Route
@@ -61,6 +60,7 @@ const App = () => {
 
             {/* Redireciona para a página de login se nenhuma rota corresponder */}
             <Route path="*" element={<Navigate to="/home" />} />
+
 
           </Routes>
 

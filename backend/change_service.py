@@ -3,28 +3,75 @@ import pandas as pd
 import os
 from cors_setup import setup_cors
 from pydantic import BaseModel
+from library.validacoes_cadastro import Sistema
 
 app = FastAPI()
 setup_cors(app)
+sistema = Sistema()
 
-# Modelo de dados
-class Cadastro_alterar(BaseModel):
-    Cadastro_enviado: list[int]
 
-@app.post("/change")
-async def alterar(request: Cadastro_alterar):
-    id_enviado = request.Cadastro_enviado
+# Modelo de dados para edição de cadastro
+class Cadastro(BaseModel):
+    id: int
+    nome: str
+    cpf: str
+    nasc: str
 
-    local = "library"
 
-    arquivo_csv = os.path.join(local, "data.csv")
+@app.post("/edit")
+async def cad_edit(request: Cadastro):
+    # acesso ao cadastro
+    id = request.id
+    nome = request.nome
+    cpf = request.cpf
+    nasc = request.nasc
 
-    df = pd.read_csv(arquivo_csv)
+    errors = {}
 
-    cadastro_selecionado = df.loc[df["id"].isin(id_enviado)]
+    # validação de dados
+    while True:
+        nome_ok, error_msg = sistema.verifica_nome_ok(nome)
+        if not nome_ok:
+            errors["nome"] = error_msg
+            return {"error": errors}
 
-    if not cadastro_selecionado.empty:
-        print(cadastro_selecionado)
-        return cadastro_selecionado.to_dict(orient="records")
-    else:
-        print("nenhum cadastro encontrado")
+        cpf_ok, error_msg = sistema.ver_cpf_ok(cpf)
+        if not cpf_ok:
+            errors["cpf"] = error_msg
+            print({"error": errors})
+            return {"error": errors}
+
+        nasc_ok, error_msg = sistema.ver_nasc_ok(nasc)
+        if nasc_ok:
+            break
+        errors["nasc"] = error_msg
+        return {"error": errors}
+
+    return {"message": "Dados OK!"}
+
+
+@app.post("/confirm")
+async def cad_confirm(request: Cadastro):
+    # acesso ao cadastro
+    id = request.id
+    nome = request.nome
+    cpf = request.cpf
+    nasc = request.nasc
+
+    # caminho para arquivo csv
+    library = "library"
+    dir_csv = os.path.join(library, "data.csv")
+
+    # ler csv
+    df = pd.read_csv(dir_csv)
+
+    # Localizando a linha do CAD correspondente ao ID no DataFrame
+    cadastro_selecionado = df[df["id"] == id].index[0]
+
+    # Atualizando os valores da linha correspondente
+    df.loc[cadastro_selecionado] = [id, nome, cpf, nasc]
+
+    # Após atualizar os valores da linha correspondente
+    df.to_csv(dir_csv, index=False)  # Salvar o DataFrame no arquivo CSV
+
+    return {"message": "Cadastro atualizado com sucesso!"}
