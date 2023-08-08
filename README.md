@@ -1,4 +1,6 @@
-## Descrição do Projeto: Aplicativo Web de Cadastro e Visualização de Dados com Arquitetura de Microserviços
+## Aplicativo Web de Cadastro e Visualização de Dados com Arquitetura de Microserviços
+
+https://github.com/marcosandradetf/FastAPI_React_2.0/assets/116861853/47d5b7fc-df98-4514-910e-d0d57e8d6805
 
 O projeto "FastAPI 2.0" é uma aplicação web de cadastro e visualização de dados armazenados em um arquivo CSV, desenvolvida com o objetivo de alcançar alta escalabilidade e desempenho. Para alcançar esse objetivo, foi adotada uma **arquitetura de microserviços**, que possibilita uma implementação modular e altamente flexível.
 
